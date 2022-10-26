@@ -16,7 +16,7 @@ namespace TheGame.Core
         {
             if (listOfCards.Exists(c => c.Card.Id == card.Id))
             {
-                throw new ArgumentException($"The card is already on the board. Card: {card.ToString()}");
+                throw new ArgumentException($"The card is already on the board. Card: {card}");
             }
 
             if (listOfCards.Exists(c => c.PositionX == positionX && c.PositionY == positionY))

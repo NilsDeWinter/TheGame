@@ -12,28 +12,28 @@ namespace TheGame.Core.Tests
         [TestInitialize]
         public void Initialize()
         {
-            Card card = new Card("0", "pathToPictureOfTheBack", "pathToPictureOfTheFront", "Base game");
+            Card card = new Card("0", "pathToPictureOfTheBack", "pathToPictureOfTheFront");
             Board = new MainBoard(card);
         }
         [TestMethod]
-        public void When_OneCardIsAddedOnEmptyPosition_Then_NumberOfCardsIsCorrect()
+        public void When_OneCardIsAdded_Then_NumberOfCardsIsCorrect()
         {
-            Card card = new Card("1", "", "", "Base game");
+            Card card = new Card("1", "", "");
             Board.AddCard(card, 0, 1);
             Assert.AreEqual(2, Board.listOfCards.Count);
 
-            Card cardIdAlreadyOnBoard = new Card("1", "", "", "Base game");
+            Card cardIdAlreadyOnBoard = new Card("1", "", "");
             try
             {
                 Board.AddCard(card, 0, 2);
             }
             catch (ArgumentException e)
             {
-                Assert.AreEqual($"The card is already on the board. Card: {cardIdAlreadyOnBoard.ToString()}", e.Message);
+                Assert.AreEqual($"The card is already on the board. Card: {cardIdAlreadyOnBoard}", e.Message);
                 Assert.AreEqual(2, Board.listOfCards.Count); //no card added
             }
 
-            Card cardOnOccupiedPosition = new Card("2", "", "", "Base game");
+            Card cardOnOccupiedPosition = new Card("2", "", "");
             try
             {
                 Board.AddCard(cardOnOccupiedPosition, 0, 0);

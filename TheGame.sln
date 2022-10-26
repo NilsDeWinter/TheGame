@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheGame.Core", "TheGame.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheGame.Core.Tests", "Tests\TheGame.Core.Tests\TheGame.Core.Tests.csproj", "{ECCDD5C3-83EE-4082-80D8-4568F6AF9C6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheGame.CardsLoader", "TheGame.CardsLoader\TheGame.CardsLoader.csproj", "{C9F0A5D5-2231-476E-B9D4-68401F3BD622}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheGame.CardsLoader.Tests", "TheGame.CardsLoader.Tests\TheGame.CardsLoader.Tests.csproj", "{4F3B67CF-9F96-4DD8-9E7C-D6ABE3F89B5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unittests Projects", "Unittests Projects", "{7856EDD9-60D4-4950-A1A7-C915F48002D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +27,21 @@ Global
 		{ECCDD5C3-83EE-4082-80D8-4568F6AF9C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECCDD5C3-83EE-4082-80D8-4568F6AF9C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECCDD5C3-83EE-4082-80D8-4568F6AF9C6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9F0A5D5-2231-476E-B9D4-68401F3BD622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9F0A5D5-2231-476E-B9D4-68401F3BD622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9F0A5D5-2231-476E-B9D4-68401F3BD622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9F0A5D5-2231-476E-B9D4-68401F3BD622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F3B67CF-9F96-4DD8-9E7C-D6ABE3F89B5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F3B67CF-9F96-4DD8-9E7C-D6ABE3F89B5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F3B67CF-9F96-4DD8-9E7C-D6ABE3F89B5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F3B67CF-9F96-4DD8-9E7C-D6ABE3F89B5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ECCDD5C3-83EE-4082-80D8-4568F6AF9C6A} = {7856EDD9-60D4-4950-A1A7-C915F48002D7}
+		{4F3B67CF-9F96-4DD8-9E7C-D6ABE3F89B5D} = {7856EDD9-60D4-4950-A1A7-C915F48002D7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD388611-D93F-4C30-8172-E72FE66349AF}
