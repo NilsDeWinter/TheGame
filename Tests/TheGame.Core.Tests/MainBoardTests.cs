@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TheGame.Core.Cards;
 
 namespace TheGame.Core.Tests
 {
@@ -12,17 +13,17 @@ namespace TheGame.Core.Tests
         [TestInitialize]
         public void Initialize()
         {
-            Card card = new Card("0", "pathToPictureOfTheBack", "pathToPictureOfTheFront");
+            Card card = new Card("0", "pathToPictureOfTheBack", "pathToPictureOfTheFront", "origin");
             Board = new MainBoard(card);
         }
         [TestMethod]
         public void When_OneCardIsAdded_Then_NumberOfCardsIsCorrect()
         {
-            Card card = new Card("1", "", "");
+            Card card = new Card("1", "", "", "origin");
             Board.AddCard(card, 0, 1);
             Assert.AreEqual(2, Board.listOfCards.Count);
 
-            Card cardIdAlreadyOnBoard = new Card("1", "", "");
+            Card cardIdAlreadyOnBoard = new Card("1", "", "", "origin");
             try
             {
                 Board.AddCard(card, 0, 2);
@@ -33,7 +34,7 @@ namespace TheGame.Core.Tests
                 Assert.AreEqual(2, Board.listOfCards.Count); //no card added
             }
 
-            Card cardOnOccupiedPosition = new Card("2", "", "");
+            Card cardOnOccupiedPosition = new Card("2", "", "", "origin");
             try
             {
                 Board.AddCard(cardOnOccupiedPosition, 0, 0);

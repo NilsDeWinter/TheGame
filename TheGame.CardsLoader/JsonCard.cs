@@ -35,11 +35,6 @@
         public JsonCard()
         {
         }
-        //TODO delete commented code when loader module is finished
-        //public JsonCard(string id, string pictureFolder = DEFAULT_PICTURE_FOLDER)
-        //{
-        //    Id = id;
-        //}
 
         public JsonCard(string id, string origin, string type, string backPictureName, string frontPictureName, string pictureFolder = DEFAULT_PICTURE_FOLDER)
         {
@@ -48,6 +43,7 @@
             Type = type;
             BackPictureName = backPictureName;
             FrontPictureName = frontPictureName;
+            _pictureFolder = pictureFolder;
         }
     }
 }

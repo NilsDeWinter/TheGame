@@ -7,7 +7,7 @@ namespace TheGame.CardsLoader.Tests
     [TestClass]
     public class CardsLoaderTests
     {
-        private OrganizedCardBox loadedCards;
+        private OrganizedJsonCardsContainer _loadedJsonCards;
         [TestInitialize]
         public void Initialize()
         {
@@ -15,22 +15,22 @@ namespace TheGame.CardsLoader.Tests
                 Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty
                     , @"Resources\cards.json");
             CardsFactory factory = new CardsFactory(jsonFilePath);
-            loadedCards = factory.Start();
+            _loadedJsonCards = factory.Start();
         }
         [TestMethod]
         public void When_CardsAreLoaded_Then_BoxContainsCards()
         {
-            Assert.IsTrue(loadedCards.ActionAdvancedSkillCards.Count > 0);
-            Assert.IsTrue(loadedCards.ActionCharacterSkillCards.Count > 0);
-            Assert.IsTrue(loadedCards.ActionCurseCards.Count > 0);
-            Assert.IsTrue(loadedCards.ActionCurseClueCards.Count > 0);
-            Assert.IsTrue(loadedCards.ActionSkillCards.Count > 0);
-            Assert.IsTrue(loadedCards.AdventureCards.Count > 0);
-            Assert.IsTrue(loadedCards.CharacterCards.Count > 0);
-            Assert.IsTrue(loadedCards.ClueCards.Count > 0);
-            Assert.IsTrue(loadedCards.ExplorationCards.Count > 0);
-            Assert.IsTrue(loadedCards.SatchelAndJournalCards.Count > 0);
-            Assert.IsTrue(loadedCards.SaveCards.Count > 0);
+            Assert.IsTrue(_loadedJsonCards.ActionAdvancedSkillCards.Count > 0);
+            Assert.IsTrue(_loadedJsonCards.ActionCharacterSkillCards.Count > 0);
+            Assert.IsTrue(_loadedJsonCards.ActionCurseCards.Count > 0);
+            Assert.IsTrue(_loadedJsonCards.ActionCurseClueCards.Count > 0);
+            Assert.IsTrue(_loadedJsonCards.ActionSkillCards.Count > 0);
+            Assert.IsTrue(_loadedJsonCards.AdventureCards.Count > 0);
+            Assert.IsTrue(_loadedJsonCards.CharacterCards.Count > 0);
+            Assert.IsTrue(_loadedJsonCards.ClueCards.Count > 0);
+            Assert.IsTrue(_loadedJsonCards.ExplorationCards.Count > 0);
+            Assert.IsTrue(_loadedJsonCards.SatchelAndJournalCards.Count > 0);
+            Assert.IsTrue(_loadedJsonCards.SaveCards.Count > 0);
         }
     }
 }

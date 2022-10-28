@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TheGame.Core.Cards;
 
 namespace TheGame.Core
 {

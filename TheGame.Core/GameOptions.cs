@@ -53,6 +53,27 @@ namespace TheGame.Core
             };
         }
 
+        public enum AvailableExtensions
+        {
+            BaseGame,
+            TheVoraciousGoddess,
+            TheBloodyHunt,
+            AnOfferingToTheGuardians,
+            TheDarkChestOfTheDamned
+        }
+        public static string GetString(this AvailableExtensions extensions)
+        {
+            return extensions switch
+            {
+                AvailableExtensions.BaseGame => "Base Game",
+                AvailableExtensions.TheVoraciousGoddess => "The Voracious Goddess",
+                AvailableExtensions.TheBloodyHunt => "The Bloody Hunt",
+                AvailableExtensions.AnOfferingToTheGuardians => "An Offering to the Guardians",
+                AvailableExtensions.TheDarkChestOfTheDamned => "The Dark Chest of the Damned",
+                _ => throw new ArgumentException($"{nameof(GameOptions)}.{nameof(GetString)}:No valid extension selected")
+            };
+        }
+
         public enum AvailableModes
         {
             Easy,
