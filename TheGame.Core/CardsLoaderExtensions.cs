@@ -9,52 +9,52 @@ namespace TheGame.Core
 
     public static class CardsLoaderExtensions
     {
-        public static ContainerForAllLoadedCards Map(this List<JsonCard> jsonCards)
+        public static ContainerForCards Map(this List<JsonCard> jsonCards)
         {
-            ContainerForAllLoadedCards cardsContainer = new ContainerForAllLoadedCards();
+            ContainerForCards containerForCards = new ContainerForCards();
             foreach (var jsonCard in jsonCards)
             {
                 var card = jsonCard.Map();
                 switch (card)
                 {
                     case AdvancedSkillActionCard skillCard:
-                        cardsContainer.AllAdvancedSkillActionCards.Add(skillCard);
+                        containerForCards.AdvancedSkillActionCards.Add(skillCard);
                         break;
                     case CharacterSkillActionCard skillCard:
-                        cardsContainer.AllCharacterSkillActionCards.Add(skillCard);
+                        containerForCards.CharacterSkillActionCards.Add(skillCard);
                         break;
                     case CursedActionCard curseCard:
-                        cardsContainer.AllCursedActionCards.Add(curseCard);
+                        containerForCards.CursedActionCards.Add(curseCard);
                         break;
                     case ClueCursedActionCard clueCard:
-                        cardsContainer.AllClueCursedActionCards.Add(clueCard);
+                        containerForCards.ClueCursedActionCards.Add(clueCard);
                         break;
                     case SkillActionCard skillCard:
-                        cardsContainer.AllSkillActionCards.Add(skillCard);
+                        containerForCards.SkillActionCards.Add(skillCard);
                         break;
                     case AdventureCard adventureCard:
-                        cardsContainer.AllAdventureCards.Add(adventureCard);
+                        containerForCards.AdventureCards.Add(adventureCard);
                         break;
                     case CharacterCard characterCard:
-                        cardsContainer.AllCharacterCards.Add(characterCard);
+                        containerForCards.CharacterCards.Add(characterCard);
                         break;
                     case ClueCard clueCard:
-                        cardsContainer.AllClueCards.Add(clueCard);
+                        containerForCards.ClueCards.Add(clueCard);
                         break;
                     case ExplorationCard explorationCard:
-                        cardsContainer.AllExplorationCards.Add(explorationCard);
+                        containerForCards.ExplorationCards.Add(explorationCard);
                         break;
                     case SatchelAndNotebookCard satchelAndNotebookCard:
-                        cardsContainer.AllSatchelAndNotebookCards.Add(satchelAndNotebookCard);
+                        containerForCards.SatchelAndNotebookCards.Add(satchelAndNotebookCard);
                         break;
                     case SaveCard saveCard:
-                        cardsContainer.AllSaveCards.Add(saveCard);
+                        containerForCards.SaveCards.Add(saveCard);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
-            return cardsContainer;
+            return containerForCards;
         }
 
         public static Card Map(this JsonCard jsonCard)
