@@ -68,7 +68,7 @@ namespace TheGame.Core
                 , "Action advanced skill" => new AdvancedSkillActionCard(jsonCard.Id, jsonCard.BackPictureName
                     , jsonCard.FrontPictureName, jsonCard.Origin.MapToAvailableExtensions())
                 , "Character" => new CharacterCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
-                    , jsonCard.CharacterName, jsonCard.Origin.MapToAvailableExtensions())
+                    , jsonCard.CharacterName.MapToAvailableCharacter(), jsonCard.Origin.MapToAvailableExtensions())
                 , "Action curse clue" => new ClueCursedActionCard(jsonCard.Id, jsonCard.BackPictureName
                     , jsonCard.FrontPictureName, jsonCard.CurseName.MapToAvailableCurses(), jsonCard.Origin.MapToAvailableExtensions())
                 , "Clue" => new ClueCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Xml;
 using TheGame.CardsLoader;
 using TheGame.Core.Cards;
 
@@ -17,6 +18,8 @@ namespace TheGame.Core
         public GameSettings GameSettings { get; set; }
         public MainBoard MainBoard { get; set; }
 
+        public List<CharacterBoard> CharacterBoards { get; set; }
+
         #region CardsPiles
         public List<Card> SatchelAndNotebook = new List<Card>(); 
 
@@ -28,6 +31,8 @@ namespace TheGame.Core
         public List<AdvancedSkillActionCard> AdvancedSkillActionCards = new List<AdvancedSkillActionCard>();
         public List<Card> BanishedCards = new List<Card>();
         public List<Card> PastCards = new List<Card>();
+
+        public List<CharacterCard> CharacterCards { get; set; }
         #endregion
 
         private static readonly string cardsJsonFilepath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty, @"Resources\cards.json");
@@ -37,15 +42,29 @@ namespace TheGame.Core
             GameSettings = settings;
         }
 
+        #region Initializing game
+
+        
         private void Initialize()
         {
             //load cards and put them in the right piles
             LoadCardsForSelectedGameExtensionsAndPutThemInPlace();
 
             //initialize characters boards
+            SetCharacterBoards();
+
             //put first card on board (ie initialize mainboard)
-            //put characters on first card
             //put curses clue cards in satchel
+            //put characters on first card
+        }
+
+        private void SetCharacterBoards()
+        {
+            foreach (var character in GameSettings.Characters)
+            {
+                CharacterBoard board =
+                    new CharacterBoard(CharacterCards.First(c => c.Character == character));
+            }
         }
 
         private void LoadCardsForSelectedGameExtensionsAndPutThemInPlace()
@@ -74,6 +93,10 @@ namespace TheGame.Core
             ActionDeck.AddRange(allCards.AllCharacterSkillActionCards.Where(c => GameSettings.Characters.Contains(c.Character)));
             ActionDeck.AddRange(allCards.AllClueCursedActionCards.Where(c => GameSettings.Curses.Contains(c.Curse)));
             ActionDeck.AddRange(allCards.AllCursedActionCards);
+
+            CharacterCards = allCards.AllCharacterCards;
         }
+
+        #endregion
     }
 }
