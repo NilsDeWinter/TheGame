@@ -2,15 +2,15 @@
 {
     public class ClueCard : Card
     {
-        public string CurseName { get; set; }
+        public GameOptions.AvailableCurses Curse { get; set; }
 
         public string StartingAdventureCard { get; set; }
 
 
-        public ClueCard(string id, string backPictureFilePath, string frontPictureFilePath, string curseName, string startingAdventureCard, GameOptions.AvailableExtensions origin)
+        public ClueCard(string id, string backPictureFilePath, string frontPictureFilePath, GameOptions.AvailableCurses curse, string startingAdventureCard, GameOptions.AvailableExtensions origin)
             : base(id, backPictureFilePath, frontPictureFilePath, origin)
         {
-            CurseName = curseName;
+            Curse = curse;
             StartingAdventureCard = startingAdventureCard;
         }
     }

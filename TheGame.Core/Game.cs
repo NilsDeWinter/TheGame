@@ -42,7 +42,6 @@ namespace TheGame.Core
             //load cards and put them in the right piles
             LoadCardsForSelectedGameExtensionsAndPutThemInPlace();
 
-
             //initialize characters boards
             //put first card on board (ie initialize mainboard)
             //put characters on first card
@@ -52,7 +51,7 @@ namespace TheGame.Core
         private void LoadCardsForSelectedGameExtensionsAndPutThemInPlace()
         {
             var allCards = LoadAllCards();
-            KeepCardsForSelectedGameExtensions(allCards, GameSettings.GameExtensions);
+            KeepCardsForSelectedGameExtensions(allCards);
         }
 
         internal ContainerForAllLoadedCards LoadAllCards()
@@ -63,19 +62,18 @@ namespace TheGame.Core
             return organizedCardBox;
         }
 
-        private void KeepCardsForSelectedGameExtensions(ContainerForAllLoadedCards allCards, List<GameOptions.AvailableExtensions> selectedGameExtensions)
+        private void KeepCardsForSelectedGameExtensions(ContainerForAllLoadedCards allCards)
         {
-            SatchelAndNotebook = allCards.AllSatchelAndNotebookCards.Select(c=> new Card(c.Id, c.PictureFilepathBack, c.PictureFilepathFront, c.Origin)).Where(c => selectedGameExtensions.Contains(c.Origin)).ToList();
+            SatchelAndNotebook = allCards.AllSatchelAndNotebookCards.Select(c=> new Card(c.Id, c.PictureFilepathBack, c.PictureFilepathFront, c.Origin)).Where(c => GameSettings.GameExtensions.Contains(c.Origin)).ToList();
             DiscardPile = new List<ActionCard>();//stays empty at the beginning of a game
-            AdventureDeck = allCards.AllAdventureCards.Where(c => selectedGameExtensions.Contains(c.Origin)).ToList();
-            ExplorationDeck = allCards.AllExplorationCards.Where(c => selectedGameExtensions.Contains(c.Origin)).ToList();
-            AdvancedSkillActionCards = allCards.AllActionAdvancedSkillCards.Where(c=> selectedGameExtensions.Contains(c.Origin)).ToList();
+            AdventureDeck = allCards.AllAdventureCards.Where(c => GameSettings.GameExtensions.Contains(c.Origin)).ToList();
+            ExplorationDeck = allCards.AllExplorationCards.Where(c => GameSettings.GameExtensions.Contains(c.Origin)).ToList();
+            AdvancedSkillActionCards = allCards.AllAdvancedSkillActionCards.Where(c=> GameSettings.GameExtensions.Contains(c.Origin)).ToList();
 
-            ActionDeck = new List<ActionCard>(); //TODO:fill correctly 
-
-            throw new NotImplementedException(); //TODO implement
-
-
+            ActionDeck = allCards.AllSkillActionCards.Select(c=> new ActionCard(c.Id, c.PictureFilepathBack, c.PictureFilepathFront, c.Origin)).Where(c => GameSettings.GameExtensions.Contains(c.Origin)).ToList();
+            ActionDeck.AddRange(allCards.AllCharacterSkillActionCards.Where(c => GameSettings.Characters.Contains(c.Character)));
+            ActionDeck.AddRange(allCards.AllClueCursedActionCards.Where(c => GameSettings.Curses.Contains(c.Curse)));
+            ActionDeck.AddRange(allCards.AllCursedActionCards);
         }
     }
 }

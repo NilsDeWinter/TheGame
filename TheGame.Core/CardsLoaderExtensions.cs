@@ -18,19 +18,19 @@ namespace TheGame.Core
                 switch (card)
                 {
                     case AdvancedSkillActionCard skillCard:
-                        cardsContainer.AllActionAdvancedSkillCards.Add(skillCard);
+                        cardsContainer.AllAdvancedSkillActionCards.Add(skillCard);
                         break;
                     case CharacterSkillActionCard skillCard:
-                        cardsContainer.AllActionCharacterSkillCards.Add(skillCard);
+                        cardsContainer.AllCharacterSkillActionCards.Add(skillCard);
                         break;
-                    case CurseActionCard curseCard:
-                        cardsContainer.AllActionCurseCards.Add(curseCard);
+                    case CursedActionCard curseCard:
+                        cardsContainer.AllCursedActionCards.Add(curseCard);
                         break;
-                    case ClueCurseActionCard clueCard:
-                        cardsContainer.AllActionCurseClueCards.Add(clueCard);
+                    case ClueCursedActionCard clueCard:
+                        cardsContainer.AllClueCursedActionCards.Add(clueCard);
                         break;
                     case SkillActionCard skillCard:
-                        cardsContainer.AllActionSkillCards.Add(skillCard);
+                        cardsContainer.AllSkillActionCards.Add(skillCard);
                         break;
                     case AdventureCard adventureCard:
                         cardsContainer.AllAdventureCards.Add(adventureCard);
@@ -61,7 +61,7 @@ namespace TheGame.Core
         {
             return jsonCard.Type switch
             {
-                "Action curse" => new CurseActionCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
+                "Action curse" => new CursedActionCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
                     , jsonCard.Origin.MapToAvailableExtensions())
                 , "Action skill" => new SkillActionCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
                     , jsonCard.Origin.MapToAvailableExtensions())
@@ -69,12 +69,12 @@ namespace TheGame.Core
                     , jsonCard.FrontPictureName, jsonCard.Origin.MapToAvailableExtensions())
                 , "Character" => new CharacterCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
                     , jsonCard.CharacterName, jsonCard.Origin.MapToAvailableExtensions())
-                , "Action curse clue" => new ClueCurseActionCard(jsonCard.Id, jsonCard.BackPictureName
-                    , jsonCard.FrontPictureName, jsonCard.CurseName, jsonCard.Origin.MapToAvailableExtensions())
+                , "Action curse clue" => new ClueCursedActionCard(jsonCard.Id, jsonCard.BackPictureName
+                    , jsonCard.FrontPictureName, jsonCard.CurseName.MapToAvailableCurses(), jsonCard.Origin.MapToAvailableExtensions())
                 , "Clue" => new ClueCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
-                    , jsonCard.CurseName, jsonCard.StartingAdventureCard, jsonCard.Origin.MapToAvailableExtensions())
+                    , jsonCard.CurseName.MapToAvailableCurses(), jsonCard.StartingAdventureCard, jsonCard.Origin.MapToAvailableExtensions())
                 , "Action character skill" => new CharacterSkillActionCard(jsonCard.Id, jsonCard.BackPictureName
-                    , jsonCard.FrontPictureName, jsonCard.CharacterName, jsonCard.Origin.MapToAvailableExtensions())
+                    , jsonCard.FrontPictureName, jsonCard.CharacterName.MapToAvailableCharacter(), jsonCard.Origin.MapToAvailableExtensions())
                 , "Exploration" => new ExplorationCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
                     , jsonCard.Area, jsonCard.Origin.MapToAvailableExtensions())
                 , "Adventure" => new AdventureCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
@@ -84,6 +84,39 @@ namespace TheGame.Core
                 , "Save" => new SaveCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
                     , jsonCard.Origin.MapToAvailableExtensions())
                 , _ => new Card(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName, jsonCard.Origin.MapToAvailableExtensions())
+            };
+        }
+
+        public static GameOptions.AvailableCharacters MapToAvailableCharacter(this string character)
+        {
+            return character switch
+            {
+                "Ferdinand Lachapellière" => GameOptions.AvailableCharacters.FerdinandLachapelliere,
+                "Eliot Pendleton" => GameOptions.AvailableCharacters.EliotPendleton,
+                "Dimitri Gorchkov" => GameOptions.AvailableCharacters.DimitriGorchkov,
+                "Keelan McCluskey" => GameOptions.AvailableCharacters.KeelanMcCluskey,
+                "Howard P.Lovecraft" => GameOptions.AvailableCharacters.HowardPLovecraft,
+                "Mary Kingsley" => GameOptions.AvailableCharacters.MaryKingsley,
+                "Victor Frankenstein" => GameOptions.AvailableCharacters.VictorFrankenstein,
+                _ => throw new ArgumentException(
+                    $"{nameof(CardsLoaderExtensions)}.{nameof(MapToAvailableCurses)}:No valid character selected")
+            };
+        }
+
+        public static GameOptions.AvailableCurses MapToAvailableCurses(this string curse)
+        {
+            return curse switch
+            {
+                "The Voracious Goddess" => GameOptions.AvailableCurses.TheVoraciousGoddess
+                ,
+                "The Bloody Hunt" => GameOptions.AvailableCurses.TheBloodyHunt
+                ,
+                "An Offering to the Guardians" => GameOptions.AvailableCurses.AnOfferingToTheGuardians
+                ,
+                "The Dark Chest of the Damned" => GameOptions.AvailableCurses.TheDarkChestOfTheDamned
+                ,
+                _ => throw new ArgumentException(
+                    $"{nameof(CardsLoaderExtensions)}.{nameof(MapToAvailableCurses)}:No valid curse selected")
             };
         }
 

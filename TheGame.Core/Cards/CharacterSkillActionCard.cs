@@ -2,12 +2,12 @@
 {
     public class CharacterSkillActionCard : ActionCard
     {
-        public string CharacterName { get; set; }
+        public GameOptions.AvailableCharacters Character { get; set; }
 
-        public CharacterSkillActionCard(string id, string backPictureFilePath, string frontPictureFilePath, string characterName, GameOptions.AvailableExtensions origin)
+        public CharacterSkillActionCard(string id, string backPictureFilePath, string frontPictureFilePath, GameOptions.AvailableCharacters character, GameOptions.AvailableExtensions origin)
             : base(id, backPictureFilePath, frontPictureFilePath, origin)
         {
-            CharacterName = characterName;
+            Character = character;
         }
     }
 }
