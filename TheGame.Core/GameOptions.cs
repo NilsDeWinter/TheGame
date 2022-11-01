@@ -15,7 +15,8 @@ namespace TheGame.Core
             KeelanMcCluskey,
             HowardPLovecraft,
             MaryKingsley,
-            VictorFrankenstein
+            VictorFrankenstein, 
+            CreateYourOwnExplorer
         }
         public static string GetString(this AvailableCharacters availableCharacterEnum)
         {
@@ -28,6 +29,7 @@ namespace TheGame.Core
                 AvailableCharacters.HowardPLovecraft => "Howard P.Lovecraft",
                 AvailableCharacters.MaryKingsley => "Mary Kingsley",
                 AvailableCharacters.VictorFrankenstein => "Victor Frankenstein",
+                AvailableCharacters.CreateYourOwnExplorer => "Create your own explorer",
                 _ => throw new ArgumentException("No valid character selected")
             };
         }
@@ -55,21 +57,13 @@ namespace TheGame.Core
 
         public enum AvailableExtensions
         {
-            BaseGame,
-            TheVoraciousGoddess,
-            TheBloodyHunt,
-            AnOfferingToTheGuardians,
-            TheDarkChestOfTheDamned
+            BaseBox,
         }
         public static string GetString(this AvailableExtensions extensions)
         {
             return extensions switch
             {
-                AvailableExtensions.BaseGame => "Base Game",
-                AvailableExtensions.TheVoraciousGoddess => "The Voracious Goddess",
-                AvailableExtensions.TheBloodyHunt => "The Bloody Hunt",
-                AvailableExtensions.AnOfferingToTheGuardians => "An Offering to the Guardians",
-                AvailableExtensions.TheDarkChestOfTheDamned => "The Dark Chest of the Damned",
+                AvailableExtensions.BaseBox => "Base box",
                 _ => throw new ArgumentException($"{nameof(GameOptions)}.{nameof(GetString)}:No valid extension selected")
             };
         }

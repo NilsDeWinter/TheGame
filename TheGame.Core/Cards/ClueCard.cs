@@ -1,4 +1,6 @@
-﻿namespace TheGame.Core.Cards
+﻿using System;
+
+namespace TheGame.Core.Cards
 {
     public class ClueCard : Card
     {

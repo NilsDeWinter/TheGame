@@ -78,12 +78,22 @@ namespace TheGame.Core
                 , "Exploration" => new ExplorationCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
                     , jsonCard.Area, jsonCard.Origin.MapToAvailableExtensions())
                 , "Adventure" => new AdventureCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
-                    , jsonCard.Color, jsonCard.Number, jsonCard.Area, jsonCard.Origin.MapToAvailableExtensions())
+                    , jsonCard.Color.MapToAdventureCardColor(), jsonCard.Number, jsonCard.Area, jsonCard.Origin.MapToAvailableExtensions())
                 , "Satchel and notebook" => new SatchelAndNotebookCard(jsonCard.Id, jsonCard.BackPictureName
                     , jsonCard.FrontPictureName, jsonCard.Origin.MapToAvailableExtensions())
                 , "Save" => new SaveCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
                     , jsonCard.Origin.MapToAvailableExtensions())
                 , _ => new Card(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName, jsonCard.Origin.MapToAvailableExtensions())
+            };
+        }
+
+        public static Colors MapToAdventureCardColor(this string color)
+        {
+            return color switch
+            {
+                "Green" => Colors.Green, "Yellow" => Colors.Yellow, "White" => Colors.White,
+                _ => throw new ArgumentException(
+                    $"{nameof(CardsLoaderExtensions)}.{nameof(MapToAdventureCardColor)}:No valid color selected")
             };
         }
 
@@ -95,9 +105,10 @@ namespace TheGame.Core
                 "Eliot Pendleton" => GameOptions.AvailableCharacters.EliotPendleton,
                 "Dimitri Gorchkov" => GameOptions.AvailableCharacters.DimitriGorchkov,
                 "Keelan McCluskey" => GameOptions.AvailableCharacters.KeelanMcCluskey,
-                "Howard P.Lovecraft" => GameOptions.AvailableCharacters.HowardPLovecraft,
+                "Howard P. Lovecraft" => GameOptions.AvailableCharacters.HowardPLovecraft,
                 "Mary Kingsley" => GameOptions.AvailableCharacters.MaryKingsley,
                 "Victor Frankenstein" => GameOptions.AvailableCharacters.VictorFrankenstein,
+                "Create your own explorer" => GameOptions.AvailableCharacters.CreateYourOwnExplorer,
                 _ => throw new ArgumentException(
                     $"{nameof(CardsLoaderExtensions)}.{nameof(MapToAvailableCurses)}:No valid character selected")
             };
@@ -124,11 +135,7 @@ namespace TheGame.Core
         {
             return origin switch
             {
-                "Base Game" => GameOptions.AvailableExtensions.BaseGame
-                , "The Voracious Goddess" => GameOptions.AvailableExtensions.TheVoraciousGoddess
-                , "The Bloody Hunt" => GameOptions.AvailableExtensions.TheBloodyHunt
-                , "An Offering to the Guardians" => GameOptions.AvailableExtensions.AnOfferingToTheGuardians
-                , "The Dark Chest of the Damned" => GameOptions.AvailableExtensions.TheDarkChestOfTheDamned
+                "Base box" => GameOptions.AvailableExtensions.BaseBox
                 , _ => throw new ArgumentException($"{nameof(CardsLoaderExtensions)}.{nameof(MapToAvailableExtensions)}:No valid extension selected")
             };
         }
