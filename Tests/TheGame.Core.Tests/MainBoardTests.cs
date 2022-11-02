@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TheGame.Core.Cards;
@@ -14,7 +15,11 @@ namespace TheGame.Core.Tests
         public void Initialize()
         {
             Card card = new Card("0", "pathToPictureOfTheBack", "pathToPictureOfTheFront", GameOptions.AvailableExtensions.BaseBox);
-            _board = new MainBoard(card);
+            List<GameOptions.AvailableCharacters> characters = new List<GameOptions.AvailableCharacters>
+            {
+                GameOptions.AvailableCharacters.FerdinandLachapelliere, GameOptions.AvailableCharacters.KeelanMcCluskey
+            };
+            _board = new MainBoard(card, characters);
         }
 
         [TestMethod]

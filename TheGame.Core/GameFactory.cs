@@ -27,18 +27,18 @@ namespace TheGame.Core
 
 
             //put first card on board (ie initialize mainboard)
-            SetMainBoard(game, allCards, gameSettings.Curses);
+            SetMainBoard(game, allCards, gameSettings.Curses, gameSettings.Characters);
 
             //put characters on first card
 
             return game;
         }
 
-        private void SetMainBoard(Game game, ContainerForCards allCards, List<GameOptions.AvailableCurses> curses)
+        private void SetMainBoard(Game game, ContainerForCards allCards, List<GameOptions.AvailableCurses> curses, List<GameOptions.AvailableCharacters> characters)
         {
             var startingNumberAdventureCard = allCards.ClueCards.Where(c=> curses.Contains(c.Curse) ).Min(c => c.StartingAdventureCard);
             game.MainBoard = new MainBoard(
-                allCards.AdventureCards.FirstOrDefault(c => c.Number == startingNumberAdventureCard && c.Color == Colors.Green));
+                allCards.AdventureCards.FirstOrDefault(c => c.Number == startingNumberAdventureCard && c.Color == Colors.Green), characters);
         }
 
         private void SetCharacterBoards(Game game, List<GameOptions.AvailableCharacters> characters)

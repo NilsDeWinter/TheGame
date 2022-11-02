@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TheGame.Core.Cards;
 
 namespace TheGame.Core
@@ -7,10 +8,13 @@ namespace TheGame.Core
     public class MainBoard
     {
         public List<CardOnMainBoard> listOfCards = new List<CardOnMainBoard>();
+        public List<CharacterOnMainBoard> listOfCharacters = new List<CharacterOnMainBoard>();
 
-        public MainBoard(Card firstCard)
+        public MainBoard(Card firstCard, List<GameOptions.AvailableCharacters> characters)
         {
             listOfCards.Add(new CardOnMainBoard(firstCard, 0, 0));
+            listOfCharacters.AddRange(characters.Select(c=> new CharacterOnMainBoard(c,0,0)));
+            
         }
 
         public CardOnMainBoard AddCard(Card card, int positionX, int positionY)
@@ -37,20 +41,34 @@ namespace TheGame.Core
     /// </summary>
     public class CardOnMainBoard
     {
-        private readonly int _positionX;
-        private readonly int _positionY;
-
         public Card Card { get; set; }
-        public int PositionX => _positionX;
-        public int PositionY => _positionY;
+        public int PositionX { get; set; }
+        public int PositionY { get; set; }
 
 
         public CardOnMainBoard(Card card, int positionX, int positionY)
         {
             Card = card;
-            _positionX = positionX;
-            _positionY = positionY;
+            PositionX = positionX;
+            PositionY = positionY;
         }
-        
+    }
+
+    /// <summary>
+    /// Represent a character on the main board
+    /// </summary>
+    public class CharacterOnMainBoard
+    {
+
+        public GameOptions.AvailableCharacters Character { get; set; }
+        public int PositionX { get; set; }
+        public int PositionY { get; set; }
+
+        public CharacterOnMainBoard(GameOptions.AvailableCharacters character, int positionX, int positionY)
+        {
+            Character = character;
+            PositionX = positionX;
+            PositionY = positionY;
+        }
     }
 }

@@ -59,13 +59,25 @@ namespace TheGame.Core.Tests
         {
             Assert.IsTrue(_game.CharacterBoards.Count > 0);
 
-            for (int i=0; i< _settings.Characters.Count; i++)
+            for (int i = 0; i < _settings.Characters.Count; i++)
             {
                 Assert.IsNotNull(_game.CharacterBoards[i].CharacterCard);
                 Assert.IsTrue(_game.CharacterBoards[i].BonusCards.Count == 0);
                 Assert.IsTrue(_game.CharacterBoards[i].Inventory.Count == 0);
                 Assert.IsTrue(_game.CharacterBoards[i].SkillCards.Count == 0);
                 Assert.IsTrue(_game.CharacterBoards[i].StateCards.Count == 0);
+            }
+        }
+
+
+        [TestMethod]
+        public void When_GameHasStarted_Then_CharactersAreOnFirstCard()
+        {
+            Assert.IsTrue(_game.MainBoard.listOfCharacters.Count == _settings.Characters.Count);
+            for (int i = 0; i < _settings.Characters.Count; i++)
+            {
+                Assert.IsTrue(_game.MainBoard.listOfCharacters[i].PositionX == 0);
+                Assert.IsTrue(_game.MainBoard.listOfCharacters[i].PositionY == 0);
             }
         }
     }
