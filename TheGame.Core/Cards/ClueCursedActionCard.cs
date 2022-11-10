@@ -4,7 +4,7 @@
     {
         public GameOptions.AvailableCurses Curse { get; set; }
 
-        public ClueCursedActionCard(string id, string backPictureFilePath, string frontPictureFilePath, GameOptions.AvailableCurses curse, GameOptions.AvailableExtensions origin)
+        public ClueCursedActionCard(string id, string backPictureFilePath, string frontPictureFilePath, GameOptions.AvailableExtensions origin, GameOptions.AvailableCurses curse) 
             : base(id, backPictureFilePath, frontPictureFilePath, origin)
         {
             Curse = curse;

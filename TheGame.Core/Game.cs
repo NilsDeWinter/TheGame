@@ -23,8 +23,8 @@ namespace TheGame.Core
         #region CardsPiles
         public List<Card> SatchelAndNotebook = new List<Card>(); 
 
-        public List<ActionCard> ActionDeck = new List<ActionCard>();
-        public List<ActionCard> DiscardPile = new List<ActionCard>();
+        public PileOfCards<ActionCard> ActionDeck = new PileOfCards<ActionCard>();
+        public PileOfCards<ActionCard> DiscardPile = new PileOfCards<ActionCard>();
         public List<AdventureCard> AdventureDeck = new List<AdventureCard>();
         public List<ExplorationCard> ExplorationDeck = new List<ExplorationCard>();
 

@@ -68,17 +68,17 @@ namespace TheGame.Core
                 , "Action advanced skill" => new AdvancedSkillActionCard(jsonCard.Id, jsonCard.BackPictureName
                     , jsonCard.FrontPictureName, jsonCard.Origin.MapToAvailableExtensions())
                 , "Character" => new CharacterCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
-                    , jsonCard.CharacterName.MapToAvailableCharacter(), jsonCard.Origin.MapToAvailableExtensions())
+                    , jsonCard.Origin.MapToAvailableExtensions(), jsonCard.CharacterName.MapToAvailableCharacter())
                 , "Action curse clue" => new ClueCursedActionCard(jsonCard.Id, jsonCard.BackPictureName
-                    , jsonCard.FrontPictureName, jsonCard.CurseName.MapToAvailableCurses(), jsonCard.Origin.MapToAvailableExtensions())
+                    , jsonCard.FrontPictureName, jsonCard.Origin.MapToAvailableExtensions(), jsonCard.CurseName.MapToAvailableCurses())
                 , "Clue" => new ClueCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
-                    , jsonCard.CurseName.MapToAvailableCurses(), jsonCard.StartingAdventureCard, jsonCard.Origin.MapToAvailableExtensions())
+                    , jsonCard.Origin.MapToAvailableExtensions(), jsonCard.CurseName.MapToAvailableCurses(), jsonCard.StartingAdventureCard)
                 , "Action character skill" => new CharacterSkillActionCard(jsonCard.Id, jsonCard.BackPictureName
-                    , jsonCard.FrontPictureName, jsonCard.CharacterName.MapToAvailableCharacter(), jsonCard.Origin.MapToAvailableExtensions())
+                    , jsonCard.FrontPictureName, jsonCard.Origin.MapToAvailableExtensions(), jsonCard.CharacterName.MapToAvailableCharacter())
                 , "Exploration" => new ExplorationCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
-                    , jsonCard.Area, jsonCard.Origin.MapToAvailableExtensions())
+                    , jsonCard.Origin.MapToAvailableExtensions(), jsonCard.Area)
                 , "Adventure" => new AdventureCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName
-                    , jsonCard.Color.MapToAdventureCardColor(), jsonCard.Number, jsonCard.Area, jsonCard.Origin.MapToAvailableExtensions())
+                    , jsonCard.Origin.MapToAvailableExtensions(), jsonCard.Number, jsonCard.Color.MapToAdventureCardColor())
                 , "Satchel and notebook" => new SatchelAndNotebookCard(jsonCard.Id, jsonCard.BackPictureName
                     , jsonCard.FrontPictureName, jsonCard.Origin.MapToAvailableExtensions())
                 , "Save" => new SaveCard(jsonCard.Id, jsonCard.BackPictureName, jsonCard.FrontPictureName

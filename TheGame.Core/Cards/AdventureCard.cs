@@ -7,14 +7,11 @@
 
         public Colors Color { get; set; }
 
-        public string Area { get; set; } //TODO (4:very low) use enum
-
-        public AdventureCard(string id, string backPictureFilePath, string frontPictureFilePath, Colors color, string number, string area, GameOptions.AvailableExtensions origin)
-            : base(id, backPictureFilePath, frontPictureFilePath, origin)
+        public AdventureCard(string id, string pictureFilepathBack, string pictureFilepathFront, GameOptions.AvailableExtensions origin, string number, Colors color) 
+            : base(id, pictureFilepathBack, pictureFilepathFront, origin)
         {
-            Color = color;
             Number = number;
-            Area = area;
+            Color = color;
         }
     }
 

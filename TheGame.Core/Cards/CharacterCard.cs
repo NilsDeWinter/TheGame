@@ -4,8 +4,8 @@
     {
         public GameOptions.AvailableCharacters Character { get; set; }
 
-        public CharacterCard(string id, string backPictureFilePath, string frontPictureFilePath, GameOptions.AvailableCharacters character, GameOptions.AvailableExtensions origin)
-            : base(id, backPictureFilePath, frontPictureFilePath, origin)
+        public CharacterCard(string id, string pictureFilepathBack, string pictureFilepathFront, GameOptions.AvailableExtensions origin, GameOptions.AvailableCharacters character) 
+            : base(id, pictureFilepathBack, pictureFilepathFront, origin)
         {
             Character = character;
         }

@@ -4,24 +4,24 @@ using System.Linq;
 
 namespace TheGame.Core
 {
-    public class PileOfCards<T> : List<T>
+    public class PileOfCards<Card> : List<Card>
     {
         public PileOfCards() {}
 
-        public PileOfCards(List<T> cards)
+        public PileOfCards(List<Card> cards)
         {
             this.AddRange(cards);
         }
 
-        public (T pickedCard, bool hadEnoughCards) PickFirstCardOnTop()
+        public (Card pickedCard, bool hadEnoughCards) PickFirstCardOnTop()
         {
             var result = PickCardsOnTop(1);
             return (result.pickedCards[0], result.hadEnoughCards);
         }
-        public (List<T> pickedCards, bool hadEnoughCards) PickCardsOnTop(int numberOfCardsToPick)
+        public (List<Card> pickedCards, bool hadEnoughCards) PickCardsOnTop(int numberOfCardsToPick)
         {
             bool hasEnoughCards = true;
-            List<T> pickedCards = new List<T>();
+            List<Card> pickedCards = new List<Card>();
 
             if (numberOfCardsToPick > this.Count)
             {

@@ -4,10 +4,11 @@
     {
         public string Area { get; set; }
 
-        public ExplorationCard(string id, string backPictureFilePath, string frontPictureFilePath, string area, GameOptions.AvailableExtensions origin)
-            : base(id, backPictureFilePath, frontPictureFilePath, origin)
+        public ExplorationCard(string id, string pictureFilepathBack, string pictureFilepathFront, GameOptions.AvailableExtensions origin, string area) 
+            : base(id, pictureFilepathBack, pictureFilepathFront, origin)
         {
             Area = area;
         }
     }
+    
 }

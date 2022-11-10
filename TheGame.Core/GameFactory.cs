@@ -64,12 +64,13 @@ namespace TheGame.Core
             game.SatchelAndNotebook = allCards.SatchelAndNotebookCards.Select(c => new Card(c.Id, c.PictureFilepathBack, c.PictureFilepathFront, c.Origin)).Where(c => gameExtensions.Contains(c.Origin)).ToList();
             game.SatchelAndNotebook.AddRange(allCards.ClueCards.Where(c => curses.Contains(c.Curse)));
 
-            game.DiscardPile = new List<ActionCard>();//stays empty at the beginning of a game
+            game.DiscardPile = new PileOfCards<ActionCard>();//stays empty at the beginning of a game
             game.AdventureDeck = allCards.AdventureCards.Where(c => gameExtensions.Contains(c.Origin)).ToList();
             game.ExplorationDeck = allCards.ExplorationCards.Where(c => gameExtensions.Contains(c.Origin)).ToList();
             game.AdvancedSkillActionCards = allCards.AdvancedSkillActionCards.Where(c => gameExtensions.Contains(c.Origin)).ToList();
 
-            game.ActionDeck = allCards.SkillActionCards.Select(c => new ActionCard(c.Id, c.PictureFilepathBack, c.PictureFilepathFront, c.Origin)).Where(c => gameExtensions.Contains(c.Origin)).ToList();
+            game.ActionDeck = new PileOfCards<ActionCard>();
+            game.ActionDeck.AddRange(allCards.SkillActionCards.Select(c => new ActionCard(c.Id, c.PictureFilepathBack, c.PictureFilepathFront, c.Origin)).Where(c => gameExtensions.Contains(c.Origin))); 
             game.ActionDeck.AddRange(allCards.CharacterSkillActionCards.Where(c => characters.Contains(c.Character)));
             game.ActionDeck.AddRange(allCards.ClueCursedActionCards.Where(c => curses.Contains(c.Curse)));
             game.ActionDeck.AddRange(allCards.CursedActionCards);
