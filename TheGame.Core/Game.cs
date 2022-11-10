@@ -18,7 +18,7 @@ namespace TheGame.Core
         public GameSettings GameSettings { get; set; }
         public MainBoard MainBoard { get; set; }
 
-        public List<CharacterBoard> CharacterBoards { get; set; }
+        public List<CharacterBoard> CharacterBoards { get; set; } = new List<CharacterBoard>();
 
         #region CardsPiles
         public List<Card> SatchelAndNotebook = new List<Card>(); 

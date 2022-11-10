@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TheGame.Core.Cards;
 
-namespace TheGame.Core
+namespace TheGame.Core.Decks
 {
 
     public class ExplorationDeck : List<ExplorationCard>
@@ -21,9 +21,14 @@ namespace TheGame.Core
             int index = random.Next(cardsFromArea.Count);
 
             ExplorationCard result = cardsFromArea[index];
-            this.RemoveAt(index);
+            this.Remove(result);
 
             return result;
+        }
+        
+        public void ReturnCard(ExplorationCard card)
+        {
+            this.Add(card);
         }
     }
 }

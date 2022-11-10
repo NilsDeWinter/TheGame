@@ -47,6 +47,8 @@ namespace TheGame.Core
             {
                 CharacterBoard board =
                     new CharacterBoard(game.CharacterCards.First(c => c.Character == character));
+
+                game.CharacterBoards.Add(board);
             }
         }
         

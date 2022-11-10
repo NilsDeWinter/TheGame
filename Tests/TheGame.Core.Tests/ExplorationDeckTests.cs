@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TheGame.Core.Cards;
+using TheGame.Core.Decks;
 
 namespace TheGame.Core.Tests
 {
@@ -28,11 +29,13 @@ namespace TheGame.Core.Tests
         [TestMethod]
         public void When_PickCardFromArea_Then_CardIsNoMoreInDeck()
         {
-            ExplorationCard pickedCard = _explorationDeck.PickCardFromArea("1");
+            var area = "1";
+            ExplorationCard pickedCard = _explorationDeck.PickCardFromArea(area);
 
             Assert.IsNotNull(pickedCard);
+            Assert.AreEqual(area, pickedCard.Area);
+
             Assert.IsFalse(_explorationDeck.Contains(pickedCard));
-            Assert.IsTrue(_explorationDeck.Contains(_explorationDeck[0]));
         }
 
         [TestMethod]
