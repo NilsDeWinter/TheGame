@@ -25,31 +25,53 @@ namespace TheGame.Core.Tests
         [TestMethod]
         public void When_OneCardIsAdded_Then_NumberOfCardsIsCorrect()
         {
+            var oldNbOfCards = _board.listOfCards.Count;
+
             Card card = new Card("1", "", "", GameOptions.AvailableExtensions.BaseBox);
-            _board.AddCard(card, 0, 1);
-            Assert.AreEqual(2, _board.listOfCards.Count);
+            _board.LayCard(card, 0, 1);
+
+            Assert.AreEqual(oldNbOfCards+1, _board.listOfCards.Count);
 
             Card cardIdAlreadyOnBoard = new Card("1", "", "", GameOptions.AvailableExtensions.BaseBox);
             try
             {
-                _board.AddCard(card, 0, 2);
+                _board.LayCard(card, 0, 2);
             }
             catch (ArgumentException e)
             {
                 Assert.AreEqual($"The card is already on the board. Card: {cardIdAlreadyOnBoard}", e.Message);
-                Assert.AreEqual(2, _board.listOfCards.Count); //no card added
+                Assert.AreEqual(oldNbOfCards + 1, _board.listOfCards.Count); //no card added
             }
 
             Card cardOnOccupiedPosition = new Card("2", "", "", GameOptions.AvailableExtensions.BaseBox);
             try
             {
-                _board.AddCard(cardOnOccupiedPosition, 0, 0);
+                _board.LayCard(cardOnOccupiedPosition, 0, 0);
             }
             catch (ArgumentException e)
             {
                 Assert.AreEqual("The position is already occupied.", e.Message);
-                Assert.AreEqual(2, _board.listOfCards.Count); //no card added
+                Assert.AreEqual(oldNbOfCards + 1, _board.listOfCards.Count); //no card added
             }
+        }
+
+        [TestMethod]
+        public void When_CharacterIsPlacedOnExistingCard_Then_CharacterIsThere()
+        {
+
+            Card card = new Card("1", "", "", GameOptions.AvailableExtensions.BaseBox);
+            _board.LayCard(card, 0, 1);
+
+
+            _board.MoveCharacters(new List<GameOptions.AvailableCharacters>
+            {
+                GameOptions.AvailableCharacters.FerdinandLachapelliere
+            }, 0, 1);
+
+            var characterOnMainBoard = _board.listOfCharacters.First(c =>
+                c.Character == GameOptions.AvailableCharacters.FerdinandLachapelliere);
+
+            Assert.AreEqual((0, 1), (characterOnMainBoard.PositionX, characterOnMainBoard.PositionY));
         }
     }
 }

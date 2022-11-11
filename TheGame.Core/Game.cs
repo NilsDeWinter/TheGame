@@ -7,6 +7,7 @@ using System.Text;
 using System.Xml;
 using TheGame.CardsLoader;
 using TheGame.Core.Cards;
+using TheGame.Core.Decks;
 
 namespace TheGame.Core
 {
@@ -25,8 +26,8 @@ namespace TheGame.Core
 
         public PileOfCards<ActionCard> ActionDeck = new PileOfCards<ActionCard>();
         public PileOfCards<ActionCard> DiscardPile = new PileOfCards<ActionCard>();
-        public List<AdventureCard> AdventureDeck = new List<AdventureCard>();
-        public List<ExplorationCard> ExplorationDeck = new List<ExplorationCard>();
+        public AdventureDeck AdventureDeck = new AdventureDeck();
+        public ExplorationDeck ExplorationDeck = new ExplorationDeck();
 
         public List<AdvancedSkillActionCard> AdvancedSkillActionCards = new List<AdvancedSkillActionCard>();
         public List<Card> BanishedCards = new List<Card>();

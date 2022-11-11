@@ -27,18 +27,19 @@ namespace TheGame.Core
 
 
             //put first card on board (ie initialize mainboard)
-            SetMainBoard(game, allCards, gameSettings.Curses, gameSettings.Characters);
+            SetMainBoard(game, gameSettings.Curses, gameSettings.Characters);
 
             //put characters on first card
 
             return game;
         }
 
-        private void SetMainBoard(Game game, ContainerForCards allCards, List<GameOptions.AvailableCurses> curses, List<GameOptions.AvailableCharacters> characters)
+        private void SetMainBoard(Game game, List<GameOptions.AvailableCurses> curses, List<GameOptions.AvailableCharacters> characters)
         {
-            var startingNumberAdventureCard = allCards.ClueCards.Where(c=> curses.Contains(c.Curse) ).Min(c => c.StartingAdventureCard);
+           var clueCards = game.SatchelAndNotebook.OfType<ClueCard>();
+            var startingNumberAdventureCard = clueCards.Where(c=> curses.Contains(c.Curse) ).Min(c => c.StartingAdventureCard);
             game.MainBoard = new MainBoard(
-                allCards.AdventureCards.FirstOrDefault(c => c.Number == startingNumberAdventureCard && c.Color == Colors.Green), characters);
+                game.AdventureDeck.FirstOrDefault(c => c.Number == startingNumberAdventureCard && c.Color == Colors.Green), characters);
         }
 
         private void SetCharacterBoards(Game game, List<GameOptions.AvailableCharacters> characters)
@@ -53,7 +54,7 @@ namespace TheGame.Core
         }
         
 
-        internal ContainerForCards LoadAllCards()
+        internal LoadedCardsResult LoadAllCards()
         {
             CardsFactory loader = new CardsFactory(cardsJsonFilepath);
             var jsonCards = loader.Start();
@@ -61,23 +62,23 @@ namespace TheGame.Core
             return organizedCardBox;
         }
 
-        private void SetupCardPilesForSelectedExtensions(Game game, ContainerForCards allCards, List<GameOptions.AvailableExtensions> gameExtensions, List<GameOptions.AvailableCharacters> characters, List<GameOptions.AvailableCurses> curses)
+        private void SetupCardPilesForSelectedExtensions(Game game, LoadedCardsResult allLoadedCards, List<GameOptions.AvailableExtensions> gameExtensions, List<GameOptions.AvailableCharacters> characters, List<GameOptions.AvailableCurses> curses)
         {
-            game.SatchelAndNotebook = allCards.SatchelAndNotebookCards.Select(c => new Card(c.Id, c.PictureFilepathBack, c.PictureFilepathFront, c.Origin)).Where(c => gameExtensions.Contains(c.Origin)).ToList();
-            game.SatchelAndNotebook.AddRange(allCards.ClueCards.Where(c => curses.Contains(c.Curse)));
+            game.SatchelAndNotebook = allLoadedCards.SatchelAndNotebookCards.Select(c => new Card(c.Id, c.PictureFilepathBack, c.PictureFilepathFront, c.Origin)).Where(c => gameExtensions.Contains(c.Origin)).ToList();
+            game.SatchelAndNotebook.AddRange(allLoadedCards.ClueCards.Where(c => curses.Contains(c.Curse)));
 
             game.DiscardPile = new PileOfCards<ActionCard>();//stays empty at the beginning of a game
-            game.AdventureDeck = allCards.AdventureCards.Where(c => gameExtensions.Contains(c.Origin)).ToList();
-            game.ExplorationDeck = allCards.ExplorationCards.Where(c => gameExtensions.Contains(c.Origin)).ToList();
-            game.AdvancedSkillActionCards = allCards.AdvancedSkillActionCards.Where(c => gameExtensions.Contains(c.Origin)).ToList();
+            game.AdventureDeck.AddRange(allLoadedCards.AdventureCards.Where(c => gameExtensions.Contains(c.Origin)).ToList());
+            game.ExplorationDeck.AddRange(allLoadedCards.ExplorationCards.Where(c => gameExtensions.Contains(c.Origin)).ToList());
+            game.AdvancedSkillActionCards = allLoadedCards.AdvancedSkillActionCards.Where(c => gameExtensions.Contains(c.Origin)).ToList();
 
             game.ActionDeck = new PileOfCards<ActionCard>();
-            game.ActionDeck.AddRange(allCards.SkillActionCards.Select(c => new ActionCard(c.Id, c.PictureFilepathBack, c.PictureFilepathFront, c.Origin)).Where(c => gameExtensions.Contains(c.Origin))); 
-            game.ActionDeck.AddRange(allCards.CharacterSkillActionCards.Where(c => characters.Contains(c.Character)));
-            game.ActionDeck.AddRange(allCards.ClueCursedActionCards.Where(c => curses.Contains(c.Curse)));
-            game.ActionDeck.AddRange(allCards.CursedActionCards);
+            game.ActionDeck.AddRange(allLoadedCards.SkillActionCards.Select(c => new ActionCard(c.Id, c.PictureFilepathBack, c.PictureFilepathFront, c.Origin)).Where(c => gameExtensions.Contains(c.Origin))); 
+            game.ActionDeck.AddRange(allLoadedCards.CharacterSkillActionCards.Where(c => characters.Contains(c.Character)));
+            game.ActionDeck.AddRange(allLoadedCards.ClueCursedActionCards.Where(c => curses.Contains(c.Curse)));
+            game.ActionDeck.AddRange(allLoadedCards.CursedActionCards);
 
-            game.CharacterCards = allCards.CharacterCards;
+            game.CharacterCards = allLoadedCards.CharacterCards;
         }
     }
 }

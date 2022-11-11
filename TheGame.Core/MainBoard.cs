@@ -17,7 +17,7 @@ namespace TheGame.Core
             
         }
 
-        public CardOnMainBoard AddCard(Card card, int positionX, int positionY)
+        public CardOnMainBoard LayCard(Card card, int positionX, int positionY)
         {
             if (listOfCards.Exists(c => c.Card.Id == card.Id))
             {
@@ -33,6 +33,16 @@ namespace TheGame.Core
             listOfCards.Add(cardOnMainBoard);
 
             return cardOnMainBoard;
+        }
+
+        public void MoveCharacters(List<GameOptions.AvailableCharacters> characters, int newPositionX, int newPositionY)
+        {
+            var listCharacters = listOfCharacters.Where(c => characters.Contains(c.Character));
+            foreach (var character in listCharacters)
+            {
+                character.PositionX = newPositionX;
+                character.PositionY = newPositionY;
+            }
         }
     }
 

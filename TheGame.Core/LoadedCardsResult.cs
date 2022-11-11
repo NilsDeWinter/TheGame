@@ -5,7 +5,7 @@ using TheGame.Core.Cards;
 
 namespace TheGame.Core
 {
-    public class ContainerForCards
+    public class LoadedCardsResult
     {
         public List<CharacterCard> CharacterCards { get; set; } = new List<CharacterCard>();
         public List<ClueCard> ClueCards { get; set; } = new List<ClueCard>();
